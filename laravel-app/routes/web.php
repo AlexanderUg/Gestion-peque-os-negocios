@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::resource('products', ProductController::class);
+
+/* Route::resource('/products', ProductController::class);
+Route::resource('/products/create', ProductController::class);
+Route::resource('/products/{id}/edit', ProductController::class);
+ */
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
