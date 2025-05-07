@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        $product= Product::orderBy('id','desc')
+            ->get();
+        return view('products.index', compact('product'));
     }
 
     /**
@@ -21,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -29,15 +31,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product ->nombre =$request->nombre;
+        $product ->descripcion =$request->descripcion;
+        $product ->precio =$request->precio;
+        $product ->stock_inicial =$request->stock_inicial;
+
+        $product->save();
+
+        return redirect('/products');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show( $product)
     {
-        //
+        $product= Product::find($product);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -45,22 +56,33 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $product)
     {
-        //
+        $product = Product::find($product);
+
+        $product ->nombre =$request->nombre;
+        $product ->descripcion =$request->descripcion;
+        $product ->precio =$request->precio;
+        $product ->stock_inicial =$request->stock_inicial;
+
+        $product->save();
+        return redirect("/products/{$product->id}");
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy( $product)
     {
-        //
+        $product = Product::find($product);
+        $product->delete();
+        return redirect("/products");
     }
 }
