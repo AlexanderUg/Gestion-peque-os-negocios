@@ -17,6 +17,11 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
+        <h1>Hola</h1>
+        <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
         @inertia
     </body>
 </html>

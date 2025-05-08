@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -21,14 +21,10 @@ Route::resource('products', ProductController::class);
 Route::resource('/products/create', ProductController::class);
 Route::resource('/products/{id}/edit', ProductController::class);
  */
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+ Route::resource('locations', LocationController::class);
+
+/*  Route::get('/locations/create', [LocationController::class, 'create']);
+ Route::post('/locations', [LocationController::class, 'store']);  */
 
 require __DIR__.'/auth.php';
