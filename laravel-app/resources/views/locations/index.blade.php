@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-<style>
-     body {
+    <title>Localizar</title>
+    <style>
+        body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
@@ -19,7 +19,7 @@
         li > ul {
             margin-top: 5px;
         }
-      button {
+        button {
             background-color:rgb(106, 125, 238);
             color: white;
             border: none;
@@ -32,36 +32,32 @@
         button:hover {
             background-color:rgb(69, 78, 160);
         }
-</style>
-    
+    </style>
 </head>
 <body>
 
-<header>
-<h1>Aqui se muestra mi indice de productos
-</h1>
- </header>
+<h2>Ubicaciones</h2>
 
-<a href="/products/create"><button>
-Nuevo producto
-</button></a>
+<a href=/locations/create>
+    <button>Crear Nueva Ubicación</button>
+</a>
 
+<ul>
+    @foreach ($locations as $location)
+        <li>    {{ $location->nombre }}
 
- <ul>
-    @foreach ($product as $product)
-        <li>
-            <a href="/products/{{$product->id}}">
-                {{ $product->nombre }}
-            </a>
+        @if ($location->children->count())
+            <ul>
+                @foreach ($location->children as $child)
+                    <li>{{ $child->nombre }}</li>
+                @endforeach
+            </ul>
+        @endif
         </li>
     @endforeach
 </ul>
 
 
-
-    <footer>
-
-    </footer>
-    </form>
 </body>
+
 </html>

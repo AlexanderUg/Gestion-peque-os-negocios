@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear Ubicación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,28 +35,26 @@
     </style>
 </head>
 <body>
-    <h1>Aqui se creara los productos</h1>
+    <h1>Crear Nueva Ubicación</h1>
 
-    <form action="/products" method="POST">
+    <form method="POST" action="/locations">
         @csrf
-    <input type="text" placeholder="Introduce nombre" name="nombre" />
-    <br><br>
+        <label for="nombre">Introduce nombre de la ubicación:</label>
+        <input type="text" name="nombre" id="nombre" required />
 
-    <textarea name="descripcion" id="" placeholder="Introduce una descripcion" ></textarea>
-    <br><br>
+        <label for="parent_id">Elige ubicación padre:</label>
+        <select name="parent_id" id="parent_id">
+            <option value="">Sin ubicación padre</option>
+            @foreach($locations as $location)
+                <option value="{{ $location->id }}">{{ $location->nombre }}</option>
+            @endforeach
+        </select>
 
-    <input type="number" placeholder="Introduce un precio" name="precio" />
-<br><br>
-
-<input type="number" placeholder="Introduce un stock" name="stock_inicial"/>
-
-<br><br>
-
-<button type="submit">
-    Insertar producto
-</button>
-    
+        <button type="submit">Insertar</button>
     </form>
 
+    <a href="/locations">
+    <button>Volver al Listado de Ubicaciones</button>
+</a>
 </body>
 </html>
