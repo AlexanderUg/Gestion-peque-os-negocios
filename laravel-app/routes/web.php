@@ -2,6 +2,7 @@
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StockMovementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,5 +27,9 @@ Route::resource('/products/{id}/edit', ProductController::class);
 
 /*  Route::get('/locations/create', [LocationController::class, 'create']);
  Route::post('/locations', [LocationController::class, 'store']);  */
+
+ Route::resource('StockMovement', StockMovementController::class);
+ Route::resource('stock_movements', StockMovementController::class);
+
 
 require __DIR__.'/auth.php';
