@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\StockMovement;
 
 class ProductController extends Controller
 {
@@ -13,9 +15,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product= Product::orderBy('id','desc')
+        /* $product= Product::orderBy('id','desc')
             ->get();
-        return view('products.index', compact('product'));
+        return view('products.index', compact('product')); */
+        /* $products = Product::all();
+    return Inertia::render('Products/Index', [
+        'products' => $products]); */
+
+         $products = Product::latest()->get(['id', 'nombre', 'precio', 'stock_inicial']);
+    return inertia('Products/Index', [
+        'products' => $products
+    ]);
+
     }
 
     /**
@@ -23,8 +34,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
-    }
+/*         return view('products.create');
+ */    
+    return inertia('Products/Create');
+
+}
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +62,10 @@ class ProductController extends Controller
     public function show( $product)
     {
         $product= Product::find($product);
-        return view('products.show', compact('product'));
+        /* return view('products.show', compact('product')); */
+        return inertia('Products/Show', [
+        'product' => $product->load('Stockmovements') // Si tienes relaciones
+        ]);
     }
 
     /**
@@ -56,7 +73,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+     /*    return view('products.edit', compact('product')); */
+         return inertia('Products/Edit', [
+        'product' => $product
+    ]);
     }
 
     /**
@@ -85,4 +105,14 @@ class ProductController extends Controller
         $product->delete();
         return redirect("/products");
     }
+    public function lowStock()
+    {
+        // Asegúrate de que solo obtienes productos válidos con stock <= 5
+        $lowStockProducts = \App\Models\Product::where('stock_inicial', '<=', 5)->get();
+    
+
+             // Pasamos esos productos a la vista
+             return view('products.low_stock', compact('lowStockProducts'));
+    }
+    
 }

@@ -11,10 +11,20 @@ class Location extends Model
     public function children(){
         return $this->hasMany(Location::class, 'parent_id');
     }
+public function parent()
+{
+    return $this->belongsTo(Location::class, 'parent_id');
+}
+
     public function stockMovements()
     {
         return $this->hasMany(StockMovement::class);
     }
+
+    public function childrenRecursive()
+{
+    return $this->children()->with('childrenRecursive');
+}
 
     
 

@@ -10,14 +10,36 @@ class LocationController extends Controller
 {
     public function index()
     {
-        $locations = Location::with('children')->whereNull('parent_id')->get();
-        return view('locations.index', compact('locations'));
+         //$locations = Location::with('children')->whereNull('parent_id')->get();
+          $locations = Location::whereNull('parent_id')
+                ->with(['children' => function($query) {
+                    $query->with('children'); // Carga los nietos
+                }])
+                ->get();
+       //  return view('locations.index', compact('locations')); 
+
+        return inertia('Locations/LocationIndex',compact('locations')); 
+
+        /* $locations = Location::whereNull('parent_id')
+                ->with(['children' => function($query) {
+                    $query->with('children'); // Carga los nietos
+                }])
+                ->get();
+
+    return inertia('Locations/Index', [
+        'locations' => $locations
+    ]); */
+ 
     }
 
     public function create()
     {
-        $locations = Location::all(); 
-        return view('locations.create', compact('locations'));
+/*         $locations = Location::all(); 
+ */       /*  return view('locations.create', compact('locations')); */
+       /*  return inertia('Locations/LocationCreate'); */
+return inertia('Locations/LocationCreate', [
+        'locations' => Location::all()
+    ]);
 
     }
 
