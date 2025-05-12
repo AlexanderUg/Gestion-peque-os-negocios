@@ -18,18 +18,14 @@ Route::get('/', function () {
 
 Route::resource('products', ProductController::class);
 
-/* Route::resource('/products', ProductController::class);
-Route::resource('/products/create', ProductController::class);
-Route::resource('/products/{id}/edit', ProductController::class);
- */
-
  Route::resource('locations', LocationController::class);
 
-/*  Route::get('/locations/create', [LocationController::class, 'create']);
- Route::post('/locations', [LocationController::class, 'store']);  */
 
  Route::resource('StockMovement', StockMovementController::class);
- Route::resource('stock_movements', StockMovementController::class);
+ Route::resource('stock_movements', StockMovementController::class); 
+ 
+Route::get('/low-stock', [ProductController::class, 'lowStock'])->name('low_stock');
+Route::get('/stock-por-ubicacion', [StockMovementController::class, 'stockPorUbicacion'])->name('stock.por.ubicacion');
 
 
 require __DIR__.'/auth.php';

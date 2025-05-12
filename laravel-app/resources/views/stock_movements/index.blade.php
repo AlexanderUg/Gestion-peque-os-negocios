@@ -22,7 +22,7 @@
     <tbody>
         @foreach ($movements as $movement)
             <tr>
-                <td>{{ $movement->product->nombre }}</td>
+            <td>{{ $movement->product?->nombre ?? 'Producto no disponible' }}</td>
                 <td>{{ $movement->quantity }}</td>
                 <td>{{ ucfirst($movement->type) }}</td>
                 <td>{{ $movement->reason }}</td>

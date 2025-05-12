@@ -6,6 +6,8 @@ use App\Models\Location;
 use App\Models\Product;
 use App\Models\StockMovement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class StockMovementController extends Controller
 {
@@ -37,4 +39,14 @@ class StockMovementController extends Controller
 
         return redirect()->route('stock_movements.create')->with('success', 'Movimiento registrado correctamente.');
     }
+    public function stockPorUbicacion()
+    {
+        $stockPorUbicacion = DB::table('stock_movements')
+            ->select('product_id', 'location_id', DB::raw('SUM(CASE WHEN type = "entrada" THEN quantity ELSE -quantity END) as stock_total'))
+            ->groupBy('product_id', 'location_id')
+            ->get();
+
+        return view('stock_movements.stock_por_ubicacion', compact('stockPorUbicacion'));
+    }
+
 }
