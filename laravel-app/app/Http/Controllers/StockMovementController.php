@@ -7,21 +7,30 @@ use App\Models\Product;
 use App\Models\StockMovement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Inertia\Inertia;
 
 class StockMovementController extends Controller
 {
     public function index()
     {
         $movements = StockMovement::with('product','location')->get(); // Obtener los movimientos con los productos asociados
-        return view('stock_movements.index', compact('movements'));
+
+        return Inertia::render('stock_movements/Index',['movements' => $movements]);
+
+       /*  return view('stock_movements.index', compact('movements')); */
     }
 
     public function create()
     {
-        $products = Product::all(); // Obtener todos los productos disponibles
-        $locations = Location::all();
-        return view('stock_movements.create', compact('products','locations'));
+           return Inertia::render('stock_movements/Create',[
+        'products' => Product::all(), // Obtener todos los productos disponibles
+        'locations' => Location::all(),
+           ]);
+        /* $products = Product::all(); // Obtener todos los productos disponibles
+        $locations = Location::all(); */
+       /*  return view('stock_movements.create', compact('products','locations')); */
+
+
     }
 
     public function store(Request $request)
