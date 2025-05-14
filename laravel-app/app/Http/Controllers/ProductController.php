@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
@@ -112,7 +113,18 @@ class ProductController extends Controller
     
 
              // Pasamos esos productos a la vista
-             return view('products.low_stock', compact('lowStockProducts'));
+          /*    return view('products.low_stock', compact('lowStockProducts')); */
+
+          return Inertia::render('Low_Stock/Index', [
+        'lowStockProducts' => $lowStockProducts
+    ]);
+    }
+
+    public function exportLowStockPDF(){
+        $lowStockProducts = Product::where('stock_inicial','<=',5)->get();
+
+        $pdf = Pdf::loadView('products/low_stock_pdf',compact('lowStockProducts'));
+        return $pdf->download('productos_stock_bajo.pdf');
     }
     
 }
