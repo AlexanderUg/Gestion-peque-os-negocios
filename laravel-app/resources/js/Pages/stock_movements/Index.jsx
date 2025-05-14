@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import DashboardLayout from '@/Layouts/DashboardLayout'; // Asegúrate de que esta ruta sea correcta
 
 export default function StockMovementIndex({ movements }) {
     return (
-
-
-
-
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -61,7 +58,8 @@ export default function StockMovementIndex({ movements }) {
                 </table>
             </div>
         </motion.div>
-   
-
     );
 }
+
+// ✅ Aplicar el layout del dashboard
+StockMovementIndex.layout = page => <DashboardLayout children={page} />;

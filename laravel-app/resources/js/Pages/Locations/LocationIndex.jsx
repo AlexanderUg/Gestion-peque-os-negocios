@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import DashboardLayout from '@/Layouts/DashboardLayout'; // Asegúrate de que esta ruta sea correcta
 
 export default function LocationIndex({ locations }) {
     // Función recursiva para renderizar ubicaciones
@@ -23,7 +24,6 @@ export default function LocationIndex({ locations }) {
                 <div className="flex items-center justify-between bg-white p-4 rounded-lg hover:bg-gray-100 transition-colors border-b-2 shadow-sm hover:shadow-md">
                     <span className="font-semibold text-lg">{location.nombre}</span>
 
-                    {/* Ver más icono si tiene hijos */}
                     {location.children && location.children.length > 0 && (
                         <span className="text-gray-500 text-sm">➕</span>
                     )}
@@ -65,3 +65,6 @@ export default function LocationIndex({ locations }) {
         </div>
     );
 }
+
+// ✅ Aplicar el layout del dashboard
+LocationIndex.layout = page => <DashboardLayout children={page} />;
