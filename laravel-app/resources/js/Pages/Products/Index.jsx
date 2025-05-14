@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { PencilSquareIcon, EyeIcon, PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import DashboardLayout from '@/Layouts/DashboardLayout';
 
-// Componente para formatear el precio
+// Formatear precio
 const Price = ({ value }) => (
   <span>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(value)}</span>
 );
 
-export default function ProductIndex() {
+export default function Index() {
   const { products } = usePage().props;
   const [search, setSearch] = useState('');
   const [showLowStockOnly, setShowLowStockOnly] = useState(false);
 
   const filteredProducts = products
-    .filter((product) =>
+    .filter(product =>
       product.nombre.toLowerCase().includes(search.toLowerCase())
     )
-    .filter((product) =>
+    .filter(product =>
       showLowStockOnly ? (product.stock_inicial ?? product.stock) <= 5 : true
     );
 
@@ -43,7 +44,7 @@ export default function ProductIndex() {
         <input
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={e => setSearch(e.target.value)}
           placeholder="Buscar por nombre..."
           className="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
@@ -51,7 +52,7 @@ export default function ProductIndex() {
           <input
             type="checkbox"
             checked={showLowStockOnly}
-            onChange={(e) => setShowLowStockOnly(e.target.checked)}
+            onChange={e => setShowLowStockOnly(e.target.checked)}
             className="form-checkbox text-blue-600"
           />
           <span>Mostrar solo productos con poco stock</span>
@@ -136,3 +137,6 @@ export default function ProductIndex() {
     </div>
   );
 }
+
+// Usar layout general del dashboard
+Index.layout = page => <DashboardLayout children={page} />;

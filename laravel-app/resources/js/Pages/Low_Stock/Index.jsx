@@ -1,6 +1,7 @@
 import React from 'react';
 import { usePage } from '@inertiajs/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import DashboardLayout from '@/Layouts/DashboardLayout'; // Asegúrate de que la ruta sea correcta
 
 export default function LowStockReport() {
     const { lowStockProducts } = usePage().props;
@@ -19,22 +20,20 @@ export default function LowStockReport() {
             </div>
 
             <div className="flex gap-4 mb-6">
-    <a
-        href="/products/low-stock/pdf"
-        className="bg-red-600 text-white px-4 py-2 rounded-md shadow hover:bg-red-700 transition-colors text-sm"
-    >
-        📄 Descargar PDF
-    </a>
+                <a
+                    href="/products/low-stock/pdf"
+                    className="bg-red-600 text-white px-4 py-2 rounded-md shadow hover:bg-red-700 transition-colors text-sm"
+                >
+                    📄 Descargar PDF
+                </a>
 
-    <a
-        href="/products/low-stock/excel"
-        className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition-colors text-sm"
-    >
-        📊 Descargar Excel Proxiamamente....
-    </a>
-</div>
-
-
+                <a
+                    href="/products/low-stock/excel"
+                    className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition-colors text-sm"
+                >
+                    📊 Descargar Excel Próximamente....
+                </a>
+            </div>
 
             {lowStockProducts.length === 0 ? (
                 <div className="bg-green-50 text-green-800 px-4 py-3 rounded-md shadow">
@@ -70,3 +69,6 @@ export default function LowStockReport() {
         </div>
     );
 }
+
+// ✅ Aplicar el layout del dashboard
+LowStockReport.layout = page => <DashboardLayout children={page} />;

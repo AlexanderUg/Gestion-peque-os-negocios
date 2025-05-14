@@ -12,7 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 /* Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
  */
-Route::get('/', [HomeController::class, 'index'])->name('home');
+ 
+ Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', fn () => Inertia::render('Home'));
 
 
 Route::resource('products', ProductController::class);
