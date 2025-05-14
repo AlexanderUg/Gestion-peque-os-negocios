@@ -7,6 +7,7 @@ export default function Home() {
     { name: 'Locations', href: '/locations' },
     { name: 'Bajo Stock', href: '/low-stock' },
     { name: 'Movimiento de Stock', href: '/StockMovement' },
+    
   ];
 
   return (
@@ -19,15 +20,16 @@ export default function Home() {
             href={item.href}
             style={{
               padding: '1rem',
-              backgroundColor: '#f0f0f0',
-              borderRadius: '8px',
+              backgroundColor: '#bcd1eb',
+              borderRadius: '20px',
+              borderColor:'#0f404f' ,
               textDecoration: 'none',
-              color: '#333',
+              color: '#04254d',
               fontWeight: 'bold',
               transition: 'background-color 0.2s ease',
             }}
             onMouseEnter={e => e.currentTarget.style.backgroundColor = '#ddd'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#f0f0f0'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#bcd1eb'}
           >
             {item.name}
           </Link>

@@ -7,6 +7,13 @@
     @viteReactRefresh
     @vite('resources/js/app.jsx')
     @inertiaHead
+    <style>
+        body{
+            background-color: #f2f4f5;
+            
+        }
+
+    </style>
 </head>
 <body class="font-sans antialiased">
     @inertia
