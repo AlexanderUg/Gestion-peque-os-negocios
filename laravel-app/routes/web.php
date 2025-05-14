@@ -6,17 +6,20 @@ use App\Http\Controllers\StockMovementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Exports\LowStockExport;
+use App\Http\Controllers\HomeController;
+use Maatwebsite\Excel\Facades\Excel;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+/* Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
+ */
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::resource('products', ProductController::class);
+
+
+Route::get('/products/low-stock/pdf', [ProductController::class, 'exportLowStockPDF']);
+
 
  Route::resource('locations', LocationController::class);
 
