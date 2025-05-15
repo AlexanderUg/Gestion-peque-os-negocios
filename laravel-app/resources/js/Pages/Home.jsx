@@ -38,7 +38,7 @@ export default function Home() {
       {/* Área principal */}
       <main className="flex-1 p-10">
         <h2 className="text-3xl font-semibold mb-4">Bienvenido 👋</h2>
-        <p className="text-gray-600">Selecciona una sección desde el menú para comenzar.</p>
+        <p className="text-gray-600">Selecciona una sección de el menú para comenzar.</p>
       </main>
     </div>
   );
