@@ -13,6 +13,8 @@ export default function StockMovementIndex({ movements }) {
         >
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-extrabold text-indigo-700">📦 Movimientos de Stock</h1>
+                
+                
                 <Link
                     href="/StockMovement/create"
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg shadow transition-all duration-300"

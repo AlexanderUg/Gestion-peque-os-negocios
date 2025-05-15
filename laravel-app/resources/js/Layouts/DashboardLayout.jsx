@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }) {
     <div className="flex min-h-screen bg-gray-50 text-gray-800 font-sans">
       {/* Panel lateral */}
       <aside className="w-64 bg-blue-100 border-r border-blue-200 p-6 shadow-md">
-        <h1 className="text-2xl font-bold text-blue-900 mb-8">📦 Panel</h1>
+        <h1 className="text-2xl font-bold text-blue-900 mb-8">📦 Inventario</h1>
         <nav className="space-y-4">
           {menuItems.map((item, index) => (
             <Link
