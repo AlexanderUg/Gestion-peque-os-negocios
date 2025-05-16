@@ -41,7 +41,7 @@ export default function LocationIndex({ locations }) {
     return (
         <div className="max-w-4xl mx-auto p-6">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold text-gray-800">Árbol de Ubicaciones</h1>
+                <h1 className="text-3xl font-extrabold text-blue-800">Árbol de Ubicaciones</h1>
                 <Link 
                     href="/locations/create" 
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-all duration-300 transform hover:scale-105"

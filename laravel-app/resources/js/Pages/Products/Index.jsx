@@ -27,7 +27,7 @@ export default function Index() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-1">Gestión de Productos</h1>
+          <h1 className="text-3xl font-extrabold text-blue-800 mb-1">Gestión de Productos</h1>
           <p className="text-gray-500 text-sm">Visualiza, busca y administra tu inventario.</p>
         </div>
         <Link
