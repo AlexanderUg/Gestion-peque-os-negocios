@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
     /**
@@ -30,14 +31,21 @@ class LoginController extends Controller
     public function store(Request $request)
     {
          $credentials = $request->validate([
-            'username' => ['admin', 'string'],
-            'password' => ['password', 'string'],
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/'); // o cualquier ruta
-        }
+           if (
+        $credentials['username'] === env('AUTH_USERNAME') &&
+        $credentials['password'] === env('AUTH_PASSWORD')
+    ) {
+        // Establecer una variable de sesión para indicar que el usuario está autenticado
+        Session::put('authenticated', true);
+        //return redirect()->intended('/')->whith(['inertia'=> true]);
+        //return redirect()->route('Home');
+return Inertia::location('/');
+
+    }
 
         return back()->withErrors([
             'username' => 'Credenciales incorrectas.',
