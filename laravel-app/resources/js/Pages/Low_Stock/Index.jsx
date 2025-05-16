@@ -15,8 +15,9 @@ export default function LowStockReport() {
     return (
         <div className="max-w-5xl mx-auto px-6 py-10">
             <div className="mb-8 flex items-center space-x-3">
-                <ExclamationTriangleIcon className="w-8 h-8 text-yellow-500" />
-                <h1 className="text-2xl font-bold text-gray-800">Reporte de Productos con Stock Bajo</h1>
+                
+          <h1 className="text-3xl font-extrabold text-blue-800 mb-1">Reporte de Productos con bajo Stock</h1>
+          <ExclamationTriangleIcon className="w-8 h-8 text-orange-600" />
             </div>
 
             <div className="flex gap-4 mb-6">

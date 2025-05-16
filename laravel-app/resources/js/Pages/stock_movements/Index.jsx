@@ -12,7 +12,7 @@ export default function StockMovementIndex({ movements }) {
             className="max-w-6xl mx-auto px-6 py-10 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg"
         >
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-extrabold text-indigo-700">📦 Movimientos de Stock</h1>
+                <h1 className="text-3xl font-extrabold text-indigo-700">Movimientos de Stock 📦</h1>
                 
                 
                 <Link
