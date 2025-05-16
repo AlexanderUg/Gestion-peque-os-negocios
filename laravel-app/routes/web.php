@@ -17,7 +17,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
  Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', fn () => Inertia::render('Home'));
+//Route::get('/', fn () => Inertia::render('Home'));
 
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');

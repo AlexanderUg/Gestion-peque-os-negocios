@@ -1,77 +1,76 @@
-import React from 'react';
-import { useForm } from '@inertiajs/react';
+import React, { useState } from "react";
+import { router } from "@inertiajs/react";
+import { toast } from "sonner";
 
-export default function Login() {
-    const { data, setData, post, processing, errors } = useForm({
-        username: '',
-        password: '',
-    });
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        post('/login'); // Asegúrate de que esta ruta exista en tus rutas de Laravel
-    };
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-            <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-2">
-                    Sistema de Inventario
-                </h2>
-                <p className="text-center text-xl font-semibold text-gray-800 mb-6">
-                    Inventario App
-                </p>
+    if (!email || !password) {
+      toast.error("Por favor, completa todos los campos");
+      return;
+    }
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                            Usuario
-                        </label>
-                        <input
-                            id="username"
-                            name="username"
-                            type="text"
-                            required
-                            placeholder="Ingrese su usuario"
-                            value={data.username}
-                            onChange={(e) => setData('username', e.target.value)}
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                        {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
-                    </div>
+    setIsLoading(true);
 
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                            Contraseña
-                        </label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            required
-                            placeholder="Ingrese su contraseña"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-                    </div>
+    setTimeout(() => {
+      setIsLoading(false);
 
-                    <div>
-                        <button
-                            type="submit"
-                            disabled={processing}
-                            className="w-full bg-gray-900 text-white py-2.5 rounded-md shadow hover:bg-gray-800 transition"
-                        >
-                            Iniciar sesión
-                        </button>
-                    </div>
-                </form>
+      if (email === "demo@example.com" && password === "password") {
+        toast.success("¡Inicio de sesión exitoso!");
+        router.visit("/");
+      } else {
+        toast.error("Credenciales incorrectas. Use demo@example.com / password");
+      }
+    }, 1000);
+  };
 
-                <p className="mt-4 text-center text-sm text-gray-500">
-                    Use <span className="font-medium">admin/password</span> para iniciar sesión en esta demostración
-                </p>
-            </div>
-        </div>
-    );
-}
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="max-w-md w-full bg-white p-6 rounded shadow">
+        <h2 className="text-center text-2xl font-bold mb-4">Albaranes y Facturas</h2>
+        <p className="text-center mb-6 text-gray-600">Inicia sesión para acceder a tu cuenta</p>
+
+        <form onSubmit={handleLogin}>
+          <label htmlFor="email" className="block mb-1 font-medium">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="demo@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full mb-4 px-3 py-2 border rounded"
+          />
+
+          <label htmlFor="password" className="block mb-1 font-medium">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full mb-6 px-3 py-2 border rounded"
+          />
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          >
+            {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+          </button>
+        </form>
+
+        <p className="text-center mt-4 text-gray-500 text-sm">
+          Demo: demo@example.com / password
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
